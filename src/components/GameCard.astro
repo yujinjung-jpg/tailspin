@@ -1,6 +1,7 @@
 ---
 import type { Game } from '../types/game';
 import Tag from './Tag.astro';
+import { formatRatingLabel } from '../lib/ratings';
 import ArrowRight from '../assets/icons/arrow-right.svg';
 
 interface Props {
@@ -38,6 +39,14 @@ const { game } = Astro.props;
             )}
 
             <p class="text-slate-400 mb-4 text-sm line-clamp-2" data-testid="game-description">{game.description}</p>
+
+            <p
+                class={`text-sm ${game.starRating === null ? 'text-slate-400' : 'text-yellow-400'}`}
+                data-testid="game-card-rating"
+                aria-label={game.starRating === null ? 'No rating yet' : `Rated ${game.starRating.toFixed(1)} out of 5`}
+            >
+                {formatRatingLabel(game.starRating)}
+            </p>
 
             <div class="mt-4 text-sm text-blue-400 font-medium flex items-center">
                 <span>View details</span>

@@ -30,3 +30,13 @@ export function formatStarRating(rating: number | null): string {
 
     return '★'.repeat(fullStars) + (halfStar ? '½' : '') + '☆'.repeat(emptyStars);
 }
+
+/**
+ * Builds the compact card label for a rating, e.g. `'★★★½☆ 3.5/5'`.
+ * Returns `'No rating yet'` when the rating is `null`.
+ */
+export function formatRatingLabel(rating: number | null): string {
+    if (rating === null) return 'No rating yet';
+
+    return `${formatStarRating(rating)} ${clampRating(rating).toFixed(1)}/5`;
+}
