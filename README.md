@@ -57,6 +57,10 @@ npm run db:export     # write the seeded catalog to db/catalog.json
 > [!NOTE]
 > Seeding is idempotent — it skips games that already exist (matched by title) rather than reconciling changed rows. CI always starts from a clean database, so it reflects `games.csv` exactly. Locally, if you edit or remove rows in `games.csv`, delete `tailspin.db` and re-run `npm run db:setup` to fully regenerate.
 
+## Filtering games
+
+The home page lets you filter the game list by one or more categories (checkboxes) and by publisher (dropdown); the filters combine. Because the site is static, filtering runs client-side over the prerendered cards, and the selection is kept in the URL (e.g. `/?category=1&category=2&publisher=3`). The underlying helpers are `getAllGames(db, { categoryIds, publisherId })`, `getAllCategories`, and `getAllPublishers` in `src/lib/games.ts`.
+
 ## Running tests
 
 ```bash
